@@ -27,6 +27,11 @@ public class Card {
      */
     private Suit suit;
 
+    /**
+     * Ranks index in RANKS
+     */
+    private int rank;
+
     public Card(String value) {
         if(value == null){
             throw new IllegalArgumentException("value is null");
@@ -45,6 +50,8 @@ public class Card {
         if (RANKS.indexOf(value.charAt(1)) < 0) {
             throw new IllegalArgumentException("Illegal value for rank: " + value.charAt(1) + ", expected one of " + RANKS);
         }
+
+        this.rank = RANKS.indexOf(value.charAt(1));
     }
 
     /**
@@ -58,6 +65,10 @@ public class Card {
         }
 
         throw new IllegalArgumentException("Invalid suit code: " + suitCode + " expected one of " + SUITS);
+    }
+
+    public int compareTo(Card another) {
+        return another.rank - this.rank;
     }
 
     /**
@@ -108,7 +119,6 @@ public class Card {
 
         Card card = (Card) o;
 
-        if (suit != card.suit) return false;
         if (!value.equals(card.value)) return false;
 
         return true;
@@ -117,5 +127,10 @@ public class Card {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

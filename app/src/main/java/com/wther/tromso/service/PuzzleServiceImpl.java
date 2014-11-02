@@ -59,7 +59,10 @@ public class PuzzleServiceImpl implements PuzzleService {
         seats.put(Player.SOUTH, CardUtil.cardsFromString(deck.substring(charsPerPlayer*2, charsPerPlayer*3)));
         seats.put(Player.WEST, CardUtil.cardsFromString(deck.substring(charsPerPlayer*3, charsPerPlayer*4)));
 
+        // East plays his first card
+        final Card lead = seats.get(Player.EAST).get(0);
+
         // Prepare board
-        return new Puzzle( "Board " + id, 3, seats);
+        return new Puzzle( "Board " + id, 3, seats, lead);
     }
 }
